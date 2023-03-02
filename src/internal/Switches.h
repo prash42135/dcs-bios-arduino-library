@@ -28,6 +28,15 @@ namespace DcsBios {
 					}
 				}
 			}
+			void pollInput_Matrix(char state) {
+				//char state = digitalRead(pin_);
+				if (reverse_) state = !state;
+				if (state != lastState_) {
+					if (tryToSendDcsBiosMessage(msg_, state == HIGH ? "0" : "1")) {
+						lastState_ = state;
+					}
+				}
+			}
 		public:
 			Switch2Pos(const char* msg, char pin, bool reverse) { init_(msg, pin, reverse); }
 			Switch2Pos(const char* msg, char pin) { init_(msg, pin, false); }
