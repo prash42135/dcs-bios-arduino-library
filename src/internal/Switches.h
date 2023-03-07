@@ -38,8 +38,8 @@ namespace DcsBios {
 				}
 			}
 		public:
-			Switch2Pos(const char* msg, char pin, bool reverse) { init_(msg, reverse); }
-			Switch2Pos(const char* msg, char pin) { init_(msg, false); }
+			Switch2Pos(const char* msg, bool reverse) { init_(msg, reverse); }
+			Switch2Pos(const char* msg) { init_(msg, false); }
 	};
 
 	
