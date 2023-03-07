@@ -12,11 +12,11 @@ namespace DcsBios {
 			char pin_;
 			char lastState_;
 			bool reverse_;
-			void init_(const char* msg, char pin, bool reverse) {
+			void init_(const char* msg, bool reverse) {
 				msg_ = msg;
-				pin_ = pin;
-				pinMode(pin_, INPUT_PULLUP);
-				lastState_ = digitalRead(pin_);
+				//pin_ = pin;
+				//pinMode(pin_, INPUT_PULLUP);
+				//lastState_ = digitalRead(pin_);
 				reverse_ = reverse;
 			}
 			void pollInput() {
@@ -38,8 +38,8 @@ namespace DcsBios {
 				}
 			}
 		public:
-			Switch2Pos(const char* msg, char pin, bool reverse) { init_(msg, pin, reverse); }
-			Switch2Pos(const char* msg, char pin) { init_(msg, pin, false); }
+			Switch2Pos(const char* msg, char pin, bool reverse) { init_(msg, reverse); }
+			Switch2Pos(const char* msg, char pin) { init_(msg, false); }
 	};
 
 	
