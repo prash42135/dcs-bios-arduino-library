@@ -28,6 +28,11 @@ namespace DcsBios {
 					}
 				}
 			}
+			
+		public:
+			Switch2Pos(const char* msg, bool reverse) { init_(msg, reverse); }
+			Switch2Pos(const char* msg) { init_(msg, false); }
+			
 			void pollInput_Matrix(char state) {
 				//char state = digitalRead(pin_);
 				if (reverse_) state = !state;
@@ -37,9 +42,6 @@ namespace DcsBios {
 					}
 				}
 			}
-		public:
-			Switch2Pos(const char* msg, bool reverse) { init_(msg, reverse); }
-			Switch2Pos(const char* msg) { init_(msg, false); }
 	};
 
 	
