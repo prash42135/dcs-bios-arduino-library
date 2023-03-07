@@ -13,7 +13,6 @@ namespace DcsBios {
 		private:
 			virtual void pollInput();
 		public:
-			static PollingInput* arrayInputs[][];
 			static void setMessageSentOrQueued() { messageSentOrQueued = true; }
 	};
 	
