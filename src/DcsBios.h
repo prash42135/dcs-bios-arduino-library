@@ -57,7 +57,7 @@ do not come with their own build system, we are just putting everything into the
 		}
 		
 		void loop() {
-			PollingInput::pollInputs();
+			//PollingInput::pollInputs();
 			ExportStreamListener::loopAll();
 		}
 		
