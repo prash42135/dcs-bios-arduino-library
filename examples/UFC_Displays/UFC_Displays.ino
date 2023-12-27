@@ -17,7 +17,17 @@
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-uint8_t oled_array[] = { 7, 6, 5, 3, 2 , 0};
+uint8_t oled_array[] = { 7, 6, 5, 3, 2 };
+String displayOne;
+String displayTwo;
+String displayThree;
+String displayFour;
+String displayFive;
+String cueOne;
+String cueTwo;
+String cueThree;
+String cueFour;
+String cueFive;
 
 void tcaselect(uint8_t i) {
   if (i > 7) return;
@@ -27,7 +37,8 @@ void tcaselect(uint8_t i) {
   Wire.endTransmission();  
 }
 
-void displaytext(char* newValue) {
+void displaytext(uint8_t i, String newValue) {
+  tcaselect(i);
   display.clearDisplay();
   display.setCursor(0, 0);
   display.println(newValue);
@@ -36,61 +47,61 @@ void displaytext(char* newValue) {
 
 void onUfcOptionDisplay1Change(char* newValue) {
     /* your code here */
-    tcaselect(7);
-    displaytext(newValue);
+    displayOne = String(newValue);
 }
 DcsBios::StringBuffer<4> ufcOptionDisplay1Buffer(0x7432, onUfcOptionDisplay1Change);
 
 void onUfcOptionCueing1Change(char* newValue) {
     /* your code here */
+    cueOne = String(newValue);
 }
 DcsBios::StringBuffer<1> ufcOptionCueing1Buffer(0x7428, onUfcOptionCueing1Change);
 
 void onUfcOptionDisplay2Change(char* newValue) {
     /* your code here */
-    tcaselect(6);
-    displaytext(newValue);
+    displayTwo = String(newValue);
 }
 DcsBios::StringBuffer<4> ufcOptionDisplay2Buffer(0x7436, onUfcOptionDisplay2Change);
 
 void onUfcOptionCueing2Change(char* newValue) {
     /* your code here */
+    cueTwo = String(newValue);
 }
 DcsBios::StringBuffer<1> ufcOptionCueing2Buffer(0x742a, onUfcOptionCueing2Change);
 
 void onUfcOptionDisplay3Change(char* newValue) {
     /* your code here */
-    tcaselect(5);
-    displaytext(newValue);
+    displayThree = String(newValue);
 }
 DcsBios::StringBuffer<4> ufcOptionDisplay3Buffer(0x743a, onUfcOptionDisplay3Change);
 
 void onUfcOptionCueing3Change(char* newValue) {
     /* your code here */
+    cueThree = String(newValue);
 }
 DcsBios::StringBuffer<1> ufcOptionCueing3Buffer(0x742c, onUfcOptionCueing3Change);
 
 void onUfcOptionDisplay4Change(char* newValue) {
     /* your code here */
-    tcaselect(3);
-    displaytext(newValue);
+    displayFour = String(newValue);
 }
 DcsBios::StringBuffer<4> ufcOptionDisplay4Buffer(0x743e, onUfcOptionDisplay4Change);
 
 void onUfcOptionCueing4Change(char* newValue) {
     /* your code here */
+    cueFour = String(newValue);
 }
 DcsBios::StringBuffer<1> ufcOptionCueing4Buffer(0x742e, onUfcOptionCueing4Change);
 
 void onUfcOptionDisplay5Change(char* newValue) {
     /* your code here */
-    tcaselect(2);
-    displaytext(newValue);
+    displayFive = String(newValue);
 }
 DcsBios::StringBuffer<4> ufcOptionDisplay5Buffer(0x7442, onUfcOptionDisplay5Change);
 
 void onUfcOptionCueing5Change(char* newValue) {
     /* your code here */
+    cueFive = String(newValue);
 }
 DcsBios::StringBuffer<1> ufcOptionCueing5Buffer(0x7430, onUfcOptionCueing5Change);
 
@@ -114,7 +125,34 @@ void setup() {
   DcsBios::setup();
 }
 
+String ufc1 = String("");
+String ufc2 = String("");
+String ufc3 = String("");
+String ufc4 = String("");
+String ufc5 = String("");
+
 void loop() {
   DcsBios::loop();
+  if(!ufc1.equals(String(cueOne + displayOne))) {
+    ufc1 = String(cueOne + displayOne);
+    displaytext(7, ufc1);
+  }
+  if(!ufc2.equals(String(cueTwo + displayTwo))) {
+    ufc2 = String(cueTwo + displayTwo);
+    displaytext(6, ufc2);
+  }
+  if(!ufc3.equals(String(cueThree + displayThree))) {
+    ufc3 = String(cueThree + displayThree);
+    displaytext(5, ufc3);
+  }
+  if(!ufc1.equals(String(cueFour + displayFour))) {
+    ufc4 = String(cueFour + displayFour);
+    displaytext(3, ufc4);
+  }
+  if(!ufc1.equals(String(cueFive + displayFive))) {
+    ufc5 = String(cueFive + displayFive);
+    displaytext(2, ufc5);
+  }
+
 }
 
