@@ -13,6 +13,8 @@
 //DcsBios::LED mcLed(0x1012, 0x0800, 13);
 
 //String *keys[4][4];
+// pins labelled Rx connect to 165
+// pins labelled Cx connect to 595
 
 DcsBios::Switch2Pos leftDdiPb01("LEFT_DDI_PB_01", 1);
 DcsBios::Switch2Pos leftDdiPb02("LEFT_DDI_PB_02", 1);
